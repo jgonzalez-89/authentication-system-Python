@@ -4,15 +4,13 @@ import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { Link, useNavigate } from "react-router-dom";
 
-export const Home = () => {
-  const { store, actions } = useContext(Context);
-
+export const Signup = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const login = () => {
+  const signup = () => {
     console.log(email, password);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -30,25 +28,27 @@ export const Home = () => {
     };
 
     fetch(
-      "https://3001-4geeksacade-reactflaskh-ea2apv1hwm8.ws-eu79.gitpod.io/api/login",
+      "https://3001-4geeksacade-reactflaskh-ea2apv1hwm8.ws-eu79.gitpod.io/api/signup",
       requestOptions
     )
       .then((response) => response.json())
       .then((result) => {
-        if (result.token) {
-          localStorage.setItem("token", result.token);
-          navigate("/demo");
+        if (result.email) {
+          navigate("/");
         } else {
-          setError(result.msg);
+          setError("El usuario ya existe");
         }
       })
-
       .catch((error) => console.log("error", error));
+
+    // El usuario debe volver a login para loguearse y obtener el token
+    // if email and password is Ok la pagina slatara un alert y redirigirá a login, si el usuario ya
+    // existe, lo indicará
   };
 
   return (
-    <div className="text-center mt-5">
-      <h1> LOGIN </h1>{" "}
+    <div className="container text-center mt-5">
+      <h1> SIGNUP </h1>{" "}
       <p>
         <label class="form-label"> Email: </label>{" "}
         <input
@@ -63,11 +63,8 @@ export const Home = () => {
           onChange={(event) => setPassword(event.target.value)}
         ></input>{" "}
       </p>{" "}
-      <button type="button" class="btn btn-outline-primary m-3" onClick={login}>
-        Login{" "}
-      </button>{" "}
-      <button type="button" class="btn btn-outline-primary m-3">
-        <Link to={"/signup"}> Signup </Link>{" "}
+      <button class="btn btn-outline-primary" onClick={signup}>
+        Signup{" "}
       </button>{" "}
       {error && (
         <div class="alert alert-danger" role="alert">

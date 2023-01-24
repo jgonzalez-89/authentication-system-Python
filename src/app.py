@@ -11,6 +11,7 @@ from api.models import db
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
+from flask_jwt_extended import JWTManager
 
 #from models import Person
 
@@ -46,6 +47,9 @@ app.register_blueprint(api, url_prefix='/api')
 @app.errorhandler(APIException)
 def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code
+
+app.config["JWT_SECRET_KEY"] = "super_password" # ¡Cambia las palabras "super-secret" por otra cosa!
+jwt = JWTManager(app)
 
 # generate sitemap with all your endpoints
 @app.route('/')

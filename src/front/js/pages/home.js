@@ -50,27 +50,31 @@ export const Home = () => {
     <div className="text-center mt-5">
       <h1> LOGIN </h1>{" "}
       <p>
-        <label class="form-label"> Email: </label>{" "}
+        <label className="form-label"> Email: </label>{" "}
         <input
-          class="form-control"
+          className="form-control"
           onChange={(event) => setEmail(event.target.value)}
         ></input>{" "}
       </p>{" "}
       <p>
-        <label class="form-label"> Password: </label>{" "}
+        <label className="form-label"> Password: </label>{" "}
         <input
-          class="form-control"
+          className="form-control"
           onChange={(event) => setPassword(event.target.value)}
         ></input>{" "}
       </p>{" "}
-      <button type="button" class="btn btn-outline-primary m-3" onClick={login}>
+      <button
+        type="button"
+        className="btn btn-outline-primary m-3"
+        onClick={login}
+      >
         Login{" "}
       </button>{" "}
-      <button type="button" class="btn btn-outline-primary m-3">
+      <button type="button" className="btn btn-outline-primary m-3">
         <Link to={"/signup"}> Signup </Link>{" "}
       </button>{" "}
       {error && (
-        <div class="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert">
           {" "}
           {error}{" "}
         </div>

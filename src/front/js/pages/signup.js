@@ -41,33 +41,30 @@ export const Signup = () => {
       })
       .catch((error) => console.log("error", error));
 
-    // El usuario debe volver a login para loguearse y obtener el token
-    // if email and password is Ok la pagina slatara un alert y redirigirá a login, si el usuario ya
-    // existe, lo indicará
   };
 
   return (
     <div className="container text-center mt-5">
       <h1> SIGNUP </h1>{" "}
       <p>
-        <label class="form-label"> Email: </label>{" "}
+        <label className="form-label"> Email: </label>{" "}
         <input
-          class="form-control"
+          className="form-control"
           onChange={(event) => setEmail(event.target.value)}
         ></input>{" "}
       </p>{" "}
       <p>
-        <label class="form-label"> Password: </label>{" "}
+        <label className="form-label"> Password: </label>{" "}
         <input
-          class="form-control"
+          className="form-control"
           onChange={(event) => setPassword(event.target.value)}
         ></input>{" "}
       </p>{" "}
-      <button class="btn btn-outline-primary" onClick={signup}>
+      <button className="btn btn-outline-primary" onClick={signup}>
         Signup{" "}
       </button>{" "}
       {error && (
-        <div class="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert">
           {" "}
           {error}{" "}
         </div>

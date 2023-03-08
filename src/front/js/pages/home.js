@@ -1,84 +1,36 @@
-import React, { useContext, useState } from "react";
-import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
-import "../../styles/home.css";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import Login from '../component/Login.js';
+import Signup from '../component/SignUp.js';
+
+const ButtonGroup = ({ showLogin, handleShowLogin, handleShowSignup }) => {
+  return (
+    <div className="btn-group">
+      <button className={`btn ${showLogin ? 'btn-primary' : 'btn-secondary'}`} onClick={handleShowLogin}>Login</button>
+      <button className={`btn ${!showLogin ? 'btn-primary' : 'btn-secondary'}`} onClick={handleShowSignup}>Signup</button>
+    </div>
+  );
+};
 
 export const Home = () => {
-  const { store, actions } = useContext(Context);
+  const [showLogin, setShowLogin] = useState(true);
 
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const handleShowLogin = () => {
+    setShowLogin(true);
+  };
 
-  const login = () => {
-    console.log(email, password);
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
-      email: email,
-      password: password,
-    });
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch(
-      "https://3001-4geeksacade-reactflaskh-ea2apv1hwm8.ws-eu79.gitpod.io/api/login",
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.token) {
-          localStorage.setItem("token", result.token);
-          navigate("/demo");
-        } else {
-          setError(result.msg);
-        }
-      })
-
-      .catch((error) => console.log("error", error));
+  const handleShowSignup = () => {
+    setShowLogin(false);
   };
 
   return (
-    <div className="text-center mt-5">
-      <h1> LOGIN </h1>{" "}
-      <p>
-        <label className="form-label"> Email: </label>{" "}
-        <input
-          className="form-control"
-          onChange={(event) => setEmail(event.target.value)}
-        ></input>{" "}
-      </p>{" "}
-      <p>
-        <label className="form-label"> Password: </label>{" "}
-        <input
-          className="form-control"
-          onChange={(event) => setPassword(event.target.value)}
-        ></input>{" "}
-      </p>{" "}
-      <button
-        type="button"
-        className="btn btn-outline-primary m-3"
-        onClick={login}
-      >
-        Login{" "}
-      </button>{" "}
-      <button type="button" className="btn btn-outline-primary m-3">
-        <Link to={"/signup"}> Signup </Link>{" "}
-      </button>{" "}
-      {error && (
-        <div className="alert alert-danger" role="alert">
-          {" "}
-          {error}{" "}
-        </div>
-      )}{" "}
+    <div className="container">
+      <h1>Welcome to my App</h1>
+      <ButtonGroup
+        showLogin={showLogin}
+        handleShowLogin={handleShowLogin}
+        handleShowSignup={handleShowSignup}
+      />
+      {showLogin ? <Login /> : <Signup />}
     </div>
   );
 };

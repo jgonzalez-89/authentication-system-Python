@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { Context } from "../store/appContext";
+import { Context } from '../store/appContext';
 
 export const Demo = () => {
   const { store, actions } = useContext(Context);
@@ -9,34 +9,28 @@ export const Demo = () => {
   const navigate = useNavigate();
   useEffect(() => {
     var myHeaders = new Headers();
-    myHeaders.append(
-      "Authorization",
-      "Bearer " + localStorage.getItem("token")
-    );
+    myHeaders.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
     var requestOptions = {
-      method: "GET",
+      method: 'GET',
       headers: myHeaders,
-      redirect: "follow",
+      redirect: 'follow',
     };
 
-    fetch(
-      "https://3001-4geeksacade-reactflaskh-ea2apv1hwm8.ws-eu79.gitpod.io/api/private",
-      requestOptions
-    )
+    fetch('https://3001-4geeksacade-reactflaskh-ea2apv1hwm8.ws-eu79.gitpod.io/api/private', requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (!result.ok) {
-          navigate("/");
+          navigate('/');
         }
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => console.log('error', error));
   }, []);
 
   return (
     <div className="container">
       <ul className="list-group">
-        {" "}
+        
         {store.demo.map((item, index) => {
           return (
             <li
@@ -46,37 +40,32 @@ export const Demo = () => {
                 background: item.background,
               }}
             >
-              <Link to={"/single/" + index}>
-                <span> Link to: {item.title} </span>{" "}
-              </Link>{" "}
+              <Link to={'/single/' + index}>
+                <span> Link to: {item.title} </span>
+              </Link>
               {
-                // Conditional render example
-                // Check to see if the background is orange, if so, display the message
-                item.background === "orange" ? (
+                item.background === 'orange' ? (
                   <p
                     style={{
                       color: item.initial,
                     }}
                   >
-                    Check store / flux.js scroll to the actions to see the code{" "}
+                    Check store / flux.js scroll to the actions to see the code
                   </p>
                 ) : null
-              }{" "}
-              <button
-                className="btn btn-success"
-                onClick={() => actions.changeColor(index, "orange")}
-              >
-                Change Color{" "}
-              </button>{" "}
+              }
+              <button className="btn btn-success" onClick={() => actions.changeColor(index, 'orange')}>
+                Change Color
+              </button>
             </li>
           );
-        })}{" "}
-      </ul>{" "}
+        })}
+      </ul>
       <br />
       <Link to="/">
-        <button className="btn btn-primary"> Back home </button>{" "}
-      </Link>{" "}
-      <button> Logout </button>{" "}
+        <button className="btn btn-primary"> Back home </button>
+      </Link>
+      <button> Logout </button>
     </div>
   );
 };

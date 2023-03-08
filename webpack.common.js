@@ -36,6 +36,17 @@ module.exports = {
     ]
   },
   resolve: {
+    fallback: {
+      assert: require.resolve('assert/'),
+      crypto: require.resolve('crypto-browserify'),
+      buffer: require.resolve('buffer/'),
+      http: require.resolve('stream-http'),
+      https: require.resolve('https-browserify'),
+      os: require.resolve('os-browserify/browser'),
+      path: require.resolve('path-browserify'),
+      stream: require.resolve('stream-browserify'),
+      util: require.resolve('util/')
+    },
     extensions: ['*', '.js']
   },
   plugins: [
@@ -43,6 +54,9 @@ module.exports = {
         favicon: '4geeks.ico',
         template: 'template.html'
     }),
-    new Dotenv({ safe: true, systemvars: true })
+    new Dotenv({ safe: true, systemvars: true }),
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
   ]
 };

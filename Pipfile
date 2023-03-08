@@ -6,6 +6,8 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+bcrypt = "*"
+Flask-Bcrypt = "*"
 flask = "*"
 flask-jwt-extended = "*"
 sqlalchemy = "*"

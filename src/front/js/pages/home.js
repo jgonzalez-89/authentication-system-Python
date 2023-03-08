@@ -6,7 +6,7 @@ const ButtonGroup = ({ showLogin, handleShowLogin, handleShowSignup }) => {
   return (
     <div className="btn-group">
       <button className={`btn ${showLogin ? 'btn-primary' : 'btn-secondary'}`} onClick={handleShowLogin}>Login</button>
-      <button className={`btn ${!showLogin ? 'btn-primary' : 'btn-secondary'}`} onClick={handleShowSignup}>Signup</button>
+      <button className={`btn ${!showLogin ? 'btn-primary' : 'btn-secondary'}`} onClick={handleShowSignup}>SignUp</button>
     </div>
   );
 };
